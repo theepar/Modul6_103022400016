@@ -16,6 +16,7 @@ public class SayaMusicUser
     private int id;
     public string Username;
     private List<SayaMusicTrack> uploadedTracks = new();
+    private static Random rd = new Random();
     public SayaMusicUser(string Username)
     {
         if (Username.Length > 100)
@@ -26,7 +27,7 @@ public class SayaMusicUser
         {
             throw new ArgumentNullException("username tidak boleh null");
         }
-        this.id = Random.Shared.Next(10000, 100000);
+        this.id = rd.Next(10000, 100000);
         this.Username = Username;
     }
     public int GetTotalPlayCount()
@@ -50,7 +51,7 @@ public class SayaMusicUser
     {
         for (int i = 0; i < uploadedTracks.Count; i++) 
         {
-            Console.WriteLine($"Username : {Username} | Track {i + 1} Judul : {uploadedTracks[i].title}");
+            Console.WriteLine($" ID {id}|Username : {Username} | Track {i + 1} Judul : {uploadedTracks[i].title}");
         }
     }
 }
@@ -60,6 +61,7 @@ public class SayaMusicTrack
     private int id;
     public string title;
     public int playCount { get; private set; }
+    private static Random rd = new Random();
     public SayaMusicTrack(string title)
     {
         if(title is null)
@@ -71,7 +73,7 @@ public class SayaMusicTrack
             throw new ArgumentException("title maks 200 karakter");
         }
         this.title = title;  
-        id = Random.Shared.Next(10000, 100000);
+        id = rd.Next(10000, 100000);
         playCount = 0;
     }
     public void IncreasePlayCount(int count)
