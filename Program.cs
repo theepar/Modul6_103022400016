@@ -33,6 +33,10 @@ public class SayaMusicUser
     public int GetTotalPlayCount()
     {
         int playcount = 0;
+        if (playcount <= int.MaxValue) 
+        {
+            throw new ArgumentNullException("value melebihi batas");
+        }
         for (int i = 0; i < uploadedTracks.Count; i++) 
         {
             playcount += uploadedTracks[i].playCount;
@@ -86,9 +90,13 @@ public class SayaMusicTrack
         {
             throw new Exception("tidak boleh negatif");
         }
-        checked
-        {
-            playCount += count;
+        try { 
+            checked
+            {
+                playCount += count;
+            }
+        } catch (Exception ex) {
+            Console.WriteLine(ex.Message);
         }
     }
     public void PrintTrackDetails()
