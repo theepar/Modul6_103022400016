@@ -18,6 +18,14 @@ public class SayaMusicUser
     private List<SayaMusicTrack> uploadedTracks = new();
     public SayaMusicUser(string Username)
     {
+        if (Username.Length > 100)
+        {
+            throw new ArgumentNullException("username maks 100 karakter");
+        }
+        if (Username is null)
+        {
+            throw new ArgumentNullException("username tidak boleh null");
+        }
         this.id = Random.Shared.Next(10000, 100000);
         this.Username = Username;
     }
@@ -32,6 +40,10 @@ public class SayaMusicUser
     }
     public void AddTrack(SayaMusicTrack track)
     {
+        if (track is null)
+        {
+            throw new ArgumentNullException("track yang ditambah tidak boleh null");
+        }
         uploadedTracks.Add(track);
     }
     public void PrintAllTracks() 
